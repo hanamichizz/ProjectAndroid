@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ProjectAndroid</string>
+
+    <string-array name="names">
+        <item>กรุณาเลือกหมวดหมู่อาหาร</item>
+        <item>อาหารไทย</item>
+        <item>อาหารจีน</item>
+        <item>อาหารฝรั่งเศษ</item>
+        <item>อาหารเกาหลี</item>
+    </string-array>
 </resources>
