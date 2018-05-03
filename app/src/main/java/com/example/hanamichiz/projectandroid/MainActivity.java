@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.util.LogWriter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,22 +41,30 @@ public class MainActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> user = new HashMap<>();
         EditText foodtype = (EditText) findViewById(R.id.editText);
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        user.put("ThaiName", foodtype.getText().toString());
+
+
+        Map<String, Object> foottypes = new HashMap<>();
+        foottypes.put("ThaiName", foodtype.getText());
+        Log.i("data", String.valueOf(foottypes));
+        Log.i("data", String.valueOf(user));
 
 // Add a new document with a generated ID
         Task<DocumentReference> documentReferenceTask = db.collection("foodType")
-                .add(foodtype.getText())
+                .add(user)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    public static final String TAG = "MyActivity";
+
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        Log.i(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
+                    public static final String TAG = "Error";
                     @Override
                     public void onFailure(@NonNull Exception e) {
-
+                        Log.e(TAG, "Error adding document", e);
                     }
                 });
     }
